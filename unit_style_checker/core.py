@@ -1,4 +1,5 @@
 """SI / journal style rules for numbers and units."""
+import bisect
 import re
 from collections import Counter, namedtuple
 
@@ -41,7 +42,6 @@ def check_text(text, enabled=None):
     line_starts = [0] + [m.end() for m in re.finditer("\n", masked)]
 
     def loc(pos):
-        import bisect
         i = bisect.bisect_right(line_starts, pos) - 1
         return i + 1, pos - line_starts[i] + 1
 
